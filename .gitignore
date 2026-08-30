@@ -1,0 +1,8 @@
+.worktrees/
+.venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+work/textbook-index/
+work/behavior-eval/
+skills/maidou-grade1-family-learning/local-private-config.md
