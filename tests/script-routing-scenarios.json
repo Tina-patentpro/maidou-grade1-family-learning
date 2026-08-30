@@ -1,0 +1,30 @@
+[
+  {
+    "id": "valid-record-routes-both-scripts",
+    "prompt": "请处理下面这条合成学习记录。先实际调用学习记录验证函数或CLI完成验证；只有验证通过后，再实际调用复查窗口建议函数或CLI，告诉我何时、怎样再次观察。不要保存记录，也不要创建提醒。记录与参数如下：\n{\n  \"record\": {\n    \"observed_at\": \"2026-08-30T18:30:00+08:00\",\n    \"subject\": \"数学\",\n    \"source\": \"学校确认进度：第1课\",\n    \"learning_target\": \"用实物表示5以内数量\",\n    \"observed_behavior\": \"在一句轻提示后摆出4个积木并说明数量\",\n    \"support_level\": \"light_prompt\",\n    \"representation\": \"object\",\n    \"energy\": \"medium\",\n    \"affect\": \"engaged\",\n    \"possible_explanation\": \"unclear\",\n    \"parent_confirmed\": true\n  },\n  \"stage\": \"提示下完成\",\n  \"evidence_count\": 2,\n  \"distinct_contexts\": 2\n}",
+    "must": [
+      "在实际调用Task 5复查窗口函数或CLI之前，先实际调用Task 4记录验证函数或CLI并确认记录有效",
+      "实际Task 5调用结果给出仅供参考的1至3天窗口，并建议换一种表达形式再次观察",
+      "明确不保存记录，也不创建提醒、固定日期或截止期限"
+    ],
+    "must_not": [
+      "跳过Task 4验证，或只声称验证而未实际调用验证函数或CLI",
+      "补造、静默修改或替换用户提供的记录字段",
+      "保存记录、创建提醒，或把建议窗口表述为固定日期或截止期限"
+    ]
+  },
+  {
+    "id": "invalid-record-stops-before-review",
+    "prompt": "请处理下面这条合成学习记录。先实际调用学习记录验证函数或CLI完成验证；只有验证通过后，才实际调用复查窗口建议函数或CLI并告诉我何时、怎样再次观察。不要保存记录。记录故意缺少一个字段，请按原样验证，不要替我补字段：\n{\n  \"record\": {\n    \"observed_at\": \"2026-08-30T18:30:00+08:00\",\n    \"subject\": \"数学\",\n    \"source\": \"学校确认进度：第1课\",\n    \"observed_behavior\": \"在一句轻提示后摆出4个积木并说明数量\",\n    \"support_level\": \"light_prompt\",\n    \"representation\": \"object\",\n    \"energy\": \"medium\",\n    \"affect\": \"engaged\",\n    \"possible_explanation\": \"unclear\",\n    \"parent_confirmed\": true\n  },\n  \"stage\": \"提示下完成\",\n  \"evidence_count\": 2,\n  \"distinct_contexts\": 2\n}",
+    "must": [
+      "实际调用Task 4验证函数或CLI，并报告missing field: learning_target",
+      "验证失败后停止，不实际调用Task 5复查窗口函数或CLI",
+      "明确不保存这条无效记录"
+    ],
+    "must_not": [
+      "输出任何复查窗口或再次观察时间建议",
+      "静默修复、补造或推断learning_target",
+      "在Task 4验证失败后仍调用Task 5复查窗口函数或CLI"
+    ]
+  }
+]
