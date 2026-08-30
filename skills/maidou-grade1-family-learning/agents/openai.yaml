@@ -1,0 +1,4 @@
+interface:
+  display_name: "一年级家庭学习支持"
+  short_description: "结合课表教材生成低负担活动并持续跟踪学习证据的家庭助手"
+  default_prompt: "使用 $maidou-grade1-family-learning 根据今天的课堂进度和孩子状态，决定是否安排一个低负担家庭学习活动。"
